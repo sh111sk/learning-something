@@ -1,5 +1,36 @@
 # 00. 環境構築
 
+## 推奨: Nix(flake)で一括セットアップ
+
+`formal-methods-handson/flake.nix` が Lean 4・JDK 17・TLC・PlusCal・Alloy 6 をまとめて用意します
+(TLA+ と Alloy の jar はバージョンとハッシュを固定して取得)。
+
+```bash
+cd formal-methods-handson
+nix develop            # 初回は flake.lock が生成される(コミット推奨)
+```
+
+シェル内で使えるコマンド:
+
+| コマンド | 内容 |
+|---|---|
+| `lean` / `lake` | Lean 4(nixpkgs 版。`lean-toolchain` は無視される) |
+| `tlc -config X.cfg X.tla` | TLC モデルチェッカー |
+| `pcal X.tla` | PlusCal トランスレータ |
+| `alloy` | Alloy 6 の GUI 起動(`alloy exec ...` で CLI) |
+
+以降の「手動インストール」節は、Nix を使う場合は **読み飛ばして構いません**
+(`tlc` / `pcal` / `TLA_JAR` は flake が定義済み)。
+
+> [!NOTE]
+> Alloy の GUI は Java の Swing/AWT を使うため、Linux では X11/Wayland 環境が必要です(macOS はそのまま可)。
+> 検証済みではないので、`nix develop` が通らない場合はエラーを教えてください。
+> nixpkgs の版によって `lean4` のバージョンが変わります。`lake build` が通らなければ入力の `nixos-25.05` を調整してください。
+
+---
+
+## 手動インストール(Nix を使わない場合)
+
 3 つとも無料で、Linux / macOS / Windows(WSL 推奨)で動きます。
 
 ## 共通: Java

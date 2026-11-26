@@ -2,3 +2,4 @@
 **/states/
 **/tools/*.jar
 *.tla.bak
+.direnv/
