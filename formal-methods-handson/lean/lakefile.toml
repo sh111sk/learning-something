@@ -1,0 +1,5 @@
+name = "lean_handson"
+defaultTargets = ["LeanHandson"]
+
+[[lean_lib]]
+name = "LeanHandson"
